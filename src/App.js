@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import NavBar from './components/NavBar/NavBar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
@@ -15,12 +14,7 @@ function App() {
             <ItemListContainer greeting={'Bienvenidos'} />
           </div>
           <div className="col-lg-4">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">Añadir al carrito</h5>
-                <ItemCount initial={1} stock={10} onAdd={(quantity) => console.log('Cantidad agregada ', quantity)} />
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -29,3 +23,4 @@ function App() {
 }
 
 export default App;
+

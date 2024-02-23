@@ -6,7 +6,6 @@ const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Llama a la función getProducts para obtener los productos
     getProducts()
       .then(response => {
         setProducts(response);

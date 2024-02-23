@@ -4,7 +4,6 @@ const products = [
         name: 'Remera 1',
         price: 4500,
         category: 'remera',
-        img: 'https://www.freepik.com/free-photo/smiling-passionate-woman-dress-high-heels_3882549.htm#fromView=image_search_similar&page=1&position=12&uuid=be4e3e75-dc45-4cd8-8f81-4f50c80d5d54',
         stock: 25,  
         description: 'descripcion de remera 1'
     },

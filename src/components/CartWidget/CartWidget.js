@@ -6,7 +6,7 @@ const CartWidget = () => {
   return (
     <div>
       <i className="fas fa-shopping-cart fa-lg"></i> {/* Icono de carrito de compras de Font Awesome */}
-      0
+      
     </div>
   );
 }
