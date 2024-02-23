@@ -10,8 +10,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 function App() {
   return (
     <div className="App">
-      <NavBar /> {/* Renderiza el componente NavBar */}
-    
+      <NavBar /> {/* Renderiza el componente NavBar */}  
       <ItemCount initial={1} stock={10} onAdd={(quantity) => console.log('Cantidad agregada ', quantity)} /> {/* Renderiza el componente ItemCount */}
     </div>
   );
