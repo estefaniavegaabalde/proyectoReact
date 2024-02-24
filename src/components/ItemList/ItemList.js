@@ -10,9 +10,7 @@ const ItemList = ({ products }) => {
           <div className="card">
             <div className="card-body">
               <Item {...prod} />
-              <div className="mt-3">
-                <ItemCount initial={1} stock={prod.stock} onAdd={(quantity) => console.log('Cantidad agregada ', quantity)} />
-              </div>
+            
             </div>
           </div>
         </div>
@@ -22,4 +20,3 @@ const ItemList = ({ products }) => {
 };
 
 export default ItemList;
-
