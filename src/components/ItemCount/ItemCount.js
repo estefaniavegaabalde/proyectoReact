@@ -42,12 +42,12 @@ const ItemCount = ({ stock, initial, onAdd }) => {
         </div>
       </div>
       <div className="row justify-content-center mt-3">
-      <div className="col-auto">{/* Aquí asignamos la clase btn-purple */}
-        <button
-          className="btn-purple" onClick={() => onAdd(quantity)} disabled={!stock}>
-          Añadir al carrito
-        </button>
-      </div>
+        <div className="col-auto">{/* Aquí asignamos la clase btn-purple */}
+          <button
+            className="btn-purple" onClick={() => onAdd(quantity)} disabled={!stock}>
+            Añadir al carrito
+          </button>
+        </div>
       </div>
     </div>
   );

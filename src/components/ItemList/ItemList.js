@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Item from '../Item/Item';
-import ItemCount from '../ItemCount/ItemCount'; // Importa el componente ItemCount
 
 const ItemList = ({ products }) => {
   return (
@@ -10,7 +10,7 @@ const ItemList = ({ products }) => {
           <div className="card">
             <div className="card-body">
               <Item {...prod} />
-            
+              <Link to={`/item/${prod.id}`} className="btn btn-primary" style={{ backgroundColor: '#6a5acd' }}>Ver detalle</Link>
             </div>
           </div>
         </div>

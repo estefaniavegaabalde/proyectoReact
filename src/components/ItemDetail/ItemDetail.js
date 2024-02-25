@@ -1,8 +1,13 @@
-L// ItemDetail.js
+// ItemDetail.js
 import React from 'react';
 import ItemCount from '../ItemCount/ItemCount';
 
 const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
+    const handleAddToCart = (quantity) => {
+        // Aquí puedes manejar la lógica para agregar el producto al carrito con la cantidad seleccionada
+        console.log(`Agregado al carrito: ${quantity} unidades`);
+    };
+
     return (
         <article className="CardItem">
             <header className="Header">
@@ -26,7 +31,7 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                 </p>
             </section>
             <footer className='ItemFooter'>
-                <Link to={`/item/${id}`} className="Option"> Ver detalle</Link> {/* Corrige la llave cerrada y el formato de la URL */}
+                <ItemCount stock={stock} initial={1} onAdd={handleAddToCart} />
             </footer>
         </article>
     );

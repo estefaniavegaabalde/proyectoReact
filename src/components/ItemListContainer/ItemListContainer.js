@@ -1,29 +1,33 @@
+// ItemListContainer.js
 import React, { useState, useEffect } from 'react';
 import ItemList from '../ItemList/ItemList';
-import { getProducts,getProductsByCategory } from '../../asyncMock';
-import {useParams} from  "react-router-dom";
+import { getProducts } from '../../asyncMock';
+import { useLocation } from 'react-router-dom';
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
-
-  const {categoryId} = useParams()
+  const location = useLocation();
+  const category = location.pathname.split('/')[2]; // Obtener la categoría de la URL
 
   useEffect(() => {
-    const asyncFunc = categoryId ? getProductsByCategory : getProducts
+    const fetchProducts = async () => {
+      try {
+        const productsResponse = await getProducts(category);
+        setProducts(productsResponse);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
 
-    asyncFunc(categoryId)
-      .then(response => {
-        setProducts(response)
-      })
-      .catch(error => {
-        console.error(error)
-      })
-    }, [categoryId])
+    fetchProducts();
+  }, [category]);
 
   return (
-    <div>
-      <h1>{greeting}</h1>
-      <ItemList products={products} />
+    <div className="container mt-5">
+      <h1>Bienvenidos</h1>
+      <div className="row">
+        <ItemList products={products} />
+      </div>
     </div>
   );
 };
