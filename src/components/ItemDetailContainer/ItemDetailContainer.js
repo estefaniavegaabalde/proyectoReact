@@ -1,8 +1,8 @@
 // ItemDetailContainer.js
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getProductsById } from '../../asyncMock';
-import ItemDetail from '../ItemDetail/ItemDetail';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getProductsById } from "../../asyncMock";
+import ItemDetail from "../ItemDetail/ItemDetail";
 
 const ItemDetailContainer = () => {
     const { itemId } = useParams();
@@ -10,19 +10,15 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
         getProductsById(itemId)
-            .then(response => {
+            .then((response) => {
                 setProduct(response);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
             });
     }, [itemId]);
 
-    return (
-        <div className='ItemDetailContainer'>
-            {product && <ItemDetail {...product} />}
-        </div>
-    );
+    return <div className="container py-5">{product && <ItemDetail {...product} />}</div>;
 };
 
 export default ItemDetailContainer;

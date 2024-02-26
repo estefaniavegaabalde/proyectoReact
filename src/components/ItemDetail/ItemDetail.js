@@ -1,6 +1,6 @@
 // ItemDetail.js
-import React from 'react';
-import ItemCount from '../ItemCount/ItemCount';
+import React from "react";
+import ItemCount from "../ItemCount/ItemCount";
 
 const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
     const handleAddToCart = (quantity) => {
@@ -9,30 +9,34 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
     };
 
     return (
-        <article className="CardItem">
-            <header className="Header">
-                <h2 className="ItemHeader">{name}</h2>
-            </header>
-            <picture>
-                <img src={img} alt={name} className="ItemImg" />
-            </picture>
-            <section>
+        <article className="row">
+            <div class="col-5">
+                <picture>
+                    <img src={img} alt={name} className="w-100" />
+                </picture>
+            </div>
+            <section className="col-6">
+                <header className="Header">
+                    <h2 className="h4 fw-semibold">{name}</h2>
+                </header>
+
                 <p className="Info">
-                    Categoria: {category}
+                    <b>Categoria:</b> {category}
                 </p>
                 <p className="Info">
-                    Descripción: {description}
+                    <b>Descripción:</b> {description}
                 </p>
                 <p className="Info">
-                    Precio: ${price}
+                    <b>Precio:</b> ${price}
                 </p>
                 <p className="Info">
-                    Stock: {stock}
+                    <b>Stock:</b> {stock}
                 </p>
+
+                <footer className="ItemFooter">
+                    <ItemCount stock={stock} initial={1} onAdd={handleAddToCart} />
+                </footer>
             </section>
-            <footer className='ItemFooter'>
-                <ItemCount stock={stock} initial={1} onAdd={handleAddToCart} />
-            </footer>
         </article>
     );
 };
