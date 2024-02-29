@@ -1,5 +1,5 @@
 // asyncMock.js
-const products = [
+export const products = [
     {
         id: "1",
         name: "Remera 1",

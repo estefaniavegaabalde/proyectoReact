@@ -2,21 +2,20 @@
 import React, { useState, useEffect } from "react";
 import ItemList from "../ItemList/ItemList";
 import { getProducts } from "../../asyncMock";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const ItemListContainer = ({ title = "Bienvenidos", type = "all", category }) => {
-    const location = useLocation();
+const ItemListContainer = () => {
+    const { categoryId } = useParams(); // Obtener el valor del parámetro de ruta categoryId
 
     const [isLoading, setLoading] = useState(false);
     const [products, setProducts] = useState([]);
 
-    // Funcion que se dispara posterior a un cambio
     useEffect(() => {
         setLoading(true);
 
         const fetchProducts = async () => {
             try {
-                const productsResponse = await getProducts(type === "category" ? category : null);
+                const productsResponse = await getProducts(categoryId);
                 setProducts(productsResponse);
                 setLoading(false);
             } catch (error) {
@@ -26,12 +25,12 @@ const ItemListContainer = ({ title = "Bienvenidos", type = "all", category }) =>
         };
 
         fetchProducts();
-    }, [location.pathname]);
+    }, [categoryId]); // Dependencia categoryId para reaccionar a cambios en la URL
 
     return (
         <div className="container mt-5">
-            <h1 className="h3 mb-3">{title}</h1>
-            <div className="row">{isLoading ? <p>Cargando...</p> : <ItemList products={products} />}</div>
+            <h1 className="h3 mb-3">Products in Category: {categoryId}</h1>
+            <div className="row">{isLoading ? <p>Loading...</p> : <ItemList products={products} />}</div>
         </div>
     );
 };

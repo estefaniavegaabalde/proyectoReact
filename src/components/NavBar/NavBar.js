@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
 import CartWidget from '../CartWidget/CartWidget';
+import { products } from '../../asyncMock'; // Importa los productos
 
 const NavBar = () => {
   return (
@@ -10,15 +11,14 @@ const NavBar = () => {
         <Link to="/" className="navbar-brand" style={{ color: 'white' }}>Ecommerce</Link>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">
-            <li className="nav-item">
-              <Link to="/remeras" className="nav-link" style={{ color: 'white' }}>Remeras</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/pantalones" className="nav-link" style={{ color: 'white' }}>Pantalones</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/vestidos" className="nav-link" style={{ color: 'white' }}>Vestidos</Link>
-            </li>
+            {/* Genera dinámicamente los enlaces según las categorías */}
+            {products.map(product => (
+              <li key={product.category} className="nav-item">
+                <Link to={`/category/${product.category}`} className="nav-link" style={{ color: 'white' }}>
+                  {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+                </Link>
+              </li>
+            ))}
           </ul>
           <CartWidget />
         </div>
