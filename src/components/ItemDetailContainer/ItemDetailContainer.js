@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ItemDetail from "../ItemDetail/ItemDetail";
 
 // Importa los métodos necesarios de firebase/firestore y firebase/app
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, collection, query, where } from "firebase/firestore";
 import { db } from "../../services/firebase/firebaseConfig";
 
 const ItemDetailContainer = () => {
@@ -15,14 +15,17 @@ const ItemDetailContainer = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const docRef = doc(db, 'products', itemId);
-                const response = await getDoc(docRef);
+
+                const productRef = await doc(db, "Items", itemId);
+
+                const response = await getDoc(productRef);
+
                 if (response.exists()) {
                     const data = response.data();
                     const productAdapted = { id: response.id, ...data };
                     setProduct(productAdapted);
                 } else {
-                    console.log('No such document!');
+                    console.log("No such document!");
                 }
             } catch (error) {
                 console.error(error);
@@ -36,7 +39,21 @@ const ItemDetailContainer = () => {
 
     return (
         <div className="container py-5">
-            {loading ? <p>Loading...</p> : (product && <ItemDetail {...product} />)}
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
+                product && (
+                    <ItemDetail
+                        id={product.id}
+                        name={product.Nombre}
+                        img={product.Imagen}
+                        category={product.Categoria}
+                        description={product.Descripcion}
+                        price={product.Precio}
+                        stock={product.Stock}
+                    />
+                )
+            )}
         </div>
     );
 };

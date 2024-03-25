@@ -8,10 +8,16 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 // Importa los métodos necesarios de firestore para realizar la consulta
-import { getDocs, collection, query, where } from 'firebase/firestore';
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 // Importa la instancia de la base de datos de tu archivo firebaseConfig
-import { db } from '../../services/firebase/firebaseConfig';
+import { db } from "../../services/firebase/firebaseConfig";
+
+const CATEGORIES = {
+    remera: "Remera",
+    vestido: "Vestido",
+    pantalon: "Pantalon",
+};
 
 const ItemListContainer = () => {
     const { categoryId } = useParams(); // Obtener el valor del parámetro de ruta categoryId
@@ -22,23 +28,28 @@ const ItemListContainer = () => {
     useEffect(() => {
         setLoading(true);
 
-        const collectionRef = categoryId
-            ? query(collection(db, 'products'), where('category', '==', categoryId))  
-            : collection(db, 'products')
-        
-        getDocs(collectionRef)
-            .then(response => {
-                const productsAdapted = response.docs.map(doc => {
-                    const data = doc.data()
-                    return {id: doc.id, ...data}
-                })
-                setProducts(productsAdapted)
+        const productRef = collection(db, "Items");
+
+        const firebaseCategoryId = CATEGORIES[categoryId] ?? null;
+
+        const productQuery = query(
+            productRef,
+            firebaseCategoryId ? where("Categoria", "==", firebaseCategoryId) : null
+        );
+
+        getDocs(productQuery)
+            .then((response) => {
+                const productsAdapted = response.docs.map((doc) => {
+                    const data = doc.data();
+                    return { id: doc.id, ...data };
+                });
+                setProducts(productsAdapted);
             })
-            .catch(error => {
-                console.log(error)
+            .catch((error) => {
+                console.log(error);
             })
             .finally(() => {
-                setLoading(false)
+                setLoading(false);
             });
     }, [categoryId]); // Agrega categoryId a las dependencias del efecto
 
