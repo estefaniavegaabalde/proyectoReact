@@ -6,13 +6,13 @@ const CheckoutForm = ({ onCreateOrder, cart }) => {
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
-        email: ""
+        email: "",
     });
 
     const handleInputChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
     };
 
@@ -22,22 +22,45 @@ const CheckoutForm = ({ onCreateOrder, cart }) => {
     };
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{ width: '100%', maxWidth: '30%' }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div style={{ width: "100%", maxWidth: "30%" }}>
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="formName">
+                    <Form.Group controlId="formName" className="mb-2">
                         <Form.Label>Nombre</Form.Label>
-                        <Form.Control type="text" placeholder="Nombre" name="name" value={formData.name} onChange={handleInputChange} required />
+                        <Form.Control
+                            type="text"
+                            placeholder="Nombre"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            required
+                        />
                     </Form.Group>
-                    <Form.Group controlId="formPhone">
+                    <Form.Group controlId="formPhone" className="mb-2">
                         <Form.Label>Teléfono</Form.Label>
-                        <Form.Control type="tel" placeholder="Teléfono" name="phone" value={formData.phone} onChange={handleInputChange} required />
+                        <Form.Control
+                            type="tel"
+                            placeholder="Teléfono"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            required
+                        />
                     </Form.Group>
-                    <Form.Group controlId="formEmail">
+                    <Form.Group controlId="formEmail" className="mb-4">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Email" name="email" value={formData.email} onChange={handleInputChange} required />
+                        <Form.Control
+                            type="email"
+                            placeholder="Email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            required
+                        />
                     </Form.Group>
-                    <Button variant="primary" type="submit" style={{ backgroundColor: '#6A5ACD', width: '100%' }}>Finalizar compra</Button>
+                    <Button variant="primary" type="submit" style={{ backgroundColor: "#6A5ACD", width: "100%" }}>
+                        Finalizar compra
+                    </Button>
                 </Form>
             </div>
         </div>
